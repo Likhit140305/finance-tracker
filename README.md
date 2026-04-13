@@ -1,3 +1,14 @@
+#UI Pictures and Demo
+<img width="1913" height="1038" alt="image" src="https://github.com/user-attachments/assets/77ee673a-4959-46d5-b77b-76ff2e4e923e" />
+<img width="1915" height="950" alt="image" src="https://github.com/user-attachments/assets/6961aad4-c427-45f4-8c00-f3326f7c4f9b" />
+<img width="1567" height="948" alt="image" src="https://github.com/user-attachments/assets/a3b75f7d-c012-49bf-9d8e-fe6d4a702014" />
+<img width="1913" height="930" alt="image" src="https://github.com/user-attachments/assets/610dd21f-8a0c-428c-be9c-085527f35026" />
+<img width="1915" height="931" alt="image" src="https://github.com/user-attachments/assets/0dfcba72-cb2a-4f7c-8559-d80878fac860" />
+<img width="1915" height="927" alt="image" src="https://github.com/user-attachments/assets/1969e91e-ba89-4435-9503-0a31b2ba2d20" />
+
+
+
+
 # React + Vite
 # 💰 AI-Powered Finance Tracker
 
