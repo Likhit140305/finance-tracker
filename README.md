@@ -216,7 +216,7 @@ This project demonstrates:
 
 ## 👨‍💻 Author
 
-**Likhit Hegde**
+**Likhit Hegde** **Tejas Raja Bhatt** **Eda Manoj Krishna**
 
 ---
 
