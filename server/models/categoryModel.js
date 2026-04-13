@@ -14,7 +14,7 @@ class Category {
         await category.save();
         return category._id.toString();
     }
-
+    
     static async findByUserId(userId) {
         const categories = await CategoryModel.find({ user_id: userId }).lean();
         return categories.map(c => ({ ...c, category_id: c._id.toString() }));
