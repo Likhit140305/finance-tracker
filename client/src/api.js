@@ -20,10 +20,13 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response && error.response.status === 401) {
-            // Optional: Handle auto-logout on token expiration
-            // localStorage.removeItem('token');
-            // localStorage.removeItem('user');
-            // window.location.href = '/login';
+            // Auto-logout on expired/invalid token
+            const isAuthPage = window.location.pathname === '/login' || window.location.pathname === '/register';
+            if (!isAuthPage) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = '/login';
+            }
         }
         return Promise.reject(error);
     }
