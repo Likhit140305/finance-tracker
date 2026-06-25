@@ -38,11 +38,17 @@ exports.register = async (req, res) => {
             await Category.create(userId, cat.name, cat.type);
         }
 
-        // Generate OTP and email it (fire-and-forget — don't block registration on SMTP)
+        // Generate OTP and email it
         const otp = await Otp.create(email, 'register');
-        sendOtpEmail(email, otp, 'register').catch(err =>
-            console.error('OTP email send failed (register):', err.message)
-        );
+
+        // Always log OTP so it's visible in Render logs as fallback
+        console.log(`[OTP] register | ${email} | OTP: ${otp}`);
+
+        if (process.env.BYPASS_OTP !== 'true') {
+            sendOtpEmail(email, otp, 'register').catch(err =>
+                console.error('OTP email send failed (register):', err.message)
+            );
+        }
 
         res.status(201).json({
             message: 'Account created! Please enter the OTP sent to your email to continue.',
@@ -75,11 +81,17 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        // Generate OTP and email it (fire-and-forget — don't block login on SMTP)
+        // Generate OTP and email it
         const otp = await Otp.create(email, 'login');
-        sendOtpEmail(email, otp, 'login').catch(err =>
-            console.error('OTP email send failed (login):', err.message)
-        );
+
+        // Always log OTP so it's visible in Render logs as fallback
+        console.log(`[OTP] login | ${email} | OTP: ${otp}`);
+
+        if (process.env.BYPASS_OTP !== 'true') {
+            sendOtpEmail(email, otp, 'login').catch(err =>
+                console.error('OTP email send failed (login):', err.message)
+            );
+        }
 
         res.json({
             message: 'Password verified. Please enter the OTP sent to your email.',
