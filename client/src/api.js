@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api', // Use the robust backend URL 
+    baseURL: import.meta.env.VITE_API_URL || 'https://finance-tracker-9w35.onrender.com/api',
 });
 
 // Request Interceptor: Attach JWT Token
