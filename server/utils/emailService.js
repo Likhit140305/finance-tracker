@@ -6,11 +6,18 @@ let transporter = null;
 function getTransporter() {
     if (transporter) return transporter;
 
+    // Explicit SMTP config on port 587 (STARTTLS) — required for Render free tier
+    // Render blocks outbound port 465 (SSL), but 587 works fine
     transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,          // STARTTLS (upgrades to TLS after connection)
         auth: {
             user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS   // Gmail App Password (16-char), NOT your regular password
+            pass: process.env.EMAIL_PASS   // Gmail App Password (16-char)
+        },
+        tls: {
+            rejectUnauthorized: false   // Helps in cloud envs with strict TLS
         }
     });
 

@@ -38,9 +38,11 @@ exports.register = async (req, res) => {
             await Category.create(userId, cat.name, cat.type);
         }
 
-        // Generate OTP and email it
+        // Generate OTP and email it (fire-and-forget — don't block registration on SMTP)
         const otp = await Otp.create(email, 'register');
-        await sendOtpEmail(email, otp, 'register');
+        sendOtpEmail(email, otp, 'register').catch(err =>
+            console.error('OTP email send failed (register):', err.message)
+        );
 
         res.status(201).json({
             message: 'Account created! Please enter the OTP sent to your email to continue.',
@@ -73,9 +75,11 @@ exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        // Generate OTP and email it
+        // Generate OTP and email it (fire-and-forget — don't block login on SMTP)
         const otp = await Otp.create(email, 'login');
-        await sendOtpEmail(email, otp, 'login');
+        sendOtpEmail(email, otp, 'login').catch(err =>
+            console.error('OTP email send failed (login):', err.message)
+        );
 
         res.json({
             message: 'Password verified. Please enter the OTP sent to your email.',
